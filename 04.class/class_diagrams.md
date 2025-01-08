@@ -1,0 +1,10 @@
+- MemoApp
+  - folder
+  - constructor(folder = "./memo_folder")
+  - #getFileList()
+  - #promptSelect(filList)
+  - #findFile(fileList, selectedFirstLine)
+  - add_file()
+  - display_list()
+  - read_file()
+  - delete_file()
