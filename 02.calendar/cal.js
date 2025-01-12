@@ -3,16 +3,16 @@ import minimist from "minimist";
 
 const input = minimist(process.argv.slice(2));
 const timeStamp = new Date();
-const inputYear = input.y || timeStamp.getFullYear();
-const inputMonth = input.m || timeStamp.getMonth() + 1;
-const month = calendarize(new Date(inputYear, inputMonth - 1));
+const year = input.y ? input.y : timeStamp.getFullYear();
+const month = input.m ? input.m : timeStamp.getMonth() + 1;
+const calendar = calendarize(new Date(year, month - 1));
 
-const monthName = `     ${inputMonth}月 ${inputYear}`;
+const calendarName = `     ${month}月 ${year}`;
 const weekName = "日 月 火 水 木 金 土";
 
-console.log(monthName);
+console.log(calendarName);
 console.log(weekName);
-month.forEach((week) => {
+calendar.forEach((week) => {
   week.forEach((day) => {
     if (day === 0) {
       process.stdout.write("   ");
