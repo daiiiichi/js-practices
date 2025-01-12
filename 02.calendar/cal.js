@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import calendarize from "calendarize";
 import minimist from "minimist";
 
