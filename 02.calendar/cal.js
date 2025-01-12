@@ -2,8 +2,9 @@ import calendarize from "calendarize";
 import minimist from "minimist";
 
 const input = minimist(process.argv.slice(2));
-const inputYear = input.y || new Date().getFullYear();
-const inputMonth = input.m || new Date().getMonth() + 1;
+const timeStamp = new Date();
+const inputYear = input.y || timeStamp.getFullYear();
+const inputMonth = input.m || timeStamp.getMonth() + 1;
 const month = calendarize(new Date(inputYear, inputMonth - 1));
 
 const monthName = `     ${inputMonth}月 ${inputYear}`;
