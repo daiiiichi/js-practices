@@ -13,14 +13,16 @@ const weekdayName = "日 月 火 水 木 金 土";
 console.log(calendarName);
 console.log(weekdayName);
 calendar.forEach((week) => {
-  week.forEach((day) => {
-    if (day === 0) {
-      process.stdout.write("   ");
-    } else if (day < 10) {
-      process.stdout.write(` ${day} `);
-    } else {
-      process.stdout.write(`${day} `);
-    }
-  });
-  process.stdout.write("\n");
+  let weekStr = week
+    .map((day) => {
+      if (day === 0) {
+        return "   ";
+      } else if (day < 10) {
+        return ` ${day} `;
+      } else {
+        return `${day} `;
+      }
+    })
+    .join("");
+  process.stdout.write(weekStr.trimEnd() + "\n");
 });
