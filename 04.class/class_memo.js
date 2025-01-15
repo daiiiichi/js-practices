@@ -70,7 +70,6 @@ export class MemoApp {
           `${this.folder}/${fileName_dateTime}.txt`,
           inputMemo.join("\n"),
         );
-        rl.close();
       }
     });
   }
