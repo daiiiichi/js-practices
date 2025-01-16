@@ -1,10 +1,16 @@
-- MemoApp
-  - folder
+- TerminalInput
+  - rl()
+- FileName
+  - create()
+- Memo
   - constructor(folder = "./memo_folder")
-  - #getFileList()
-  - #promptSelect(filList)
-  - #findFile(fileList, selectedFirstLine)
-  - add_file()
-  - display_list()
-  - read_file()
-  - delete_file()
+  - getFirstLine(filePath)
+  - add()
+  - read()
+  - delete()
+- File
+  - constructor(folder = "./memo_folder")
+  - getFirstLines()
+  - SelectList(fileList)
+  - findFile(fileList, selectedFirstLine)
+  - displayList()
