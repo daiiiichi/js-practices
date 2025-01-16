@@ -3,46 +3,18 @@ import path from "path";
 import readline from "readline";
 import pkg from "enquirer";
 
-export class MemoApp {
+export class Memo {
   constructor(folder = "./memo_folder") {
     this.folder = folder;
+    this.files = new Files(folder);
   }
 
-  async #getFileList() {
-    const fileList = [];
-    try {
-      const files = await fs.promises.readdir(this.folder);
-      for (const file of files) {
-        const filePath = path.join(this.folder, file);
-        const text = await fs.promises.readFile(filePath, "utf-8");
-        const firstLine = text.split("\n")[0];
-        fileList.push({ filePath, firstLine });
-      }
-    } catch (err) {
-      console.error("Error retrieving file list:", err);
-    }
-    return fileList;
+  async getFirstLine(filePath) {
+    const text = await fs.promises.readFile(filePath, "utf-8");
+    return text.split("\n")[0];
   }
 
-  async #promptSelect(fileList) {
-    const choices = fileList.map((file) => file.firstLine);
-    const { Select } = pkg;
-    const selectPrompt = new Select({
-      name: "file",
-      message: "Choose a note:",
-      choices,
-    });
-    return selectPrompt.run();
-  }
-
-  async #findFile(fileList, selectedFirstLine) {
-    const selectedFile = fileList.find(
-      (file) => file.firstLine === selectedFirstLine,
-    );
-    return selectedFile;
-  }
-
-  add_file() {
+  add() {
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -79,22 +51,11 @@ export class MemoApp {
     });
   }
 
-  async display_list() {
+  async read() {
     try {
-      const file_list = await this.#getFileList();
-      for (const file of file_list) {
-        console.log(file.firstLine);
-      }
-    } catch (err) {
-      console.error("Error reading directory:", err);
-    }
-  }
-
-  async read_file() {
-    try {
-      const file_list = await this.#getFileList();
-      const selectedFirstLine = await this.#promptSelect(file_list);
-      const userSelectedFile = await this.#findFile(
+      const file_list = await this.files.getFirstLines();
+      const selectedFirstLine = await this.files.SelectList(file_list);
+      const userSelectedFile = await this.files.findFile(
         file_list,
         selectedFirstLine,
       );
@@ -109,17 +70,65 @@ export class MemoApp {
     }
   }
 
-  async delete_file() {
+  async delete() {
     try {
-      const file_list = await this.#getFileList();
-      const selectedFirstLine = await this.#promptSelect(file_list);
-      const userSelectedFile = await this.#findFile(
+      const file_list = await this.files.getFirstLines();
+      const selectedFirstLine = await this.files.SelectList(file_list);
+      const userSelectedFile = await this.files.findFile(
         file_list,
         selectedFirstLine,
       );
 
       await fs.promises.unlink(userSelectedFile.filePath);
-      console.log(`deteted:${userSelectedFile.firstLine}`);
+      console.log(`deleted: ${userSelectedFile.firstLine}`);
+    } catch (err) {
+      console.error("Error reading directory:", err);
+    }
+  }
+}
+
+export class Files {
+  constructor(folder = "./memo_folder") {
+    this.folder = folder;
+  }
+
+  async getFirstLines() {
+    const fileList = [];
+    try {
+      const files = await fs.promises.readdir(this.folder);
+      const memo = new Memo();
+      for (const file of files) {
+        const filePath = path.join(this.folder, file);
+        const firstLine = await memo.getFirstLine(filePath); // スペル修正
+        fileList.push({ filePath, firstLine });
+      }
+    } catch (err) {
+      console.error("Error retrieving file list:", err);
+    }
+    return fileList;
+  }
+
+  async SelectList(fileList) {
+    const choices = fileList.map((file) => file.firstLine);
+    const { Select } = pkg;
+    const selectPrompt = new Select({
+      name: "file",
+      message: "Choose a note:",
+      choices,
+    });
+    return selectPrompt.run();
+  }
+
+  async findFile(fileList, selectedFirstLine) {
+    return fileList.find((file) => file.firstLine === selectedFirstLine);
+  }
+
+  async displayList() {
+    try {
+      const file_list = await this.getFirstLines();
+      for (const file of file_list) {
+        console.log(file.firstLine);
+      }
     } catch (err) {
       console.error("Error reading directory:", err);
     }
