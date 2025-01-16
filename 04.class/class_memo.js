@@ -3,6 +3,34 @@ import path from "path";
 import readline from "readline";
 import pkg from "enquirer";
 
+class TerminalInput {
+  rl() {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+    return rl;
+  }
+}
+
+class FileName {
+  create() {
+    const now = new Date();
+    const dateTimeComponents = [
+      now.getFullYear(),
+      now.getMonth() + 1,
+      now.getDate(),
+      now.getHours(),
+      now.getMinutes(),
+      now.getSeconds(),
+    ];
+
+    return dateTimeComponents
+      .map((component) => String(component).padStart(2, "0"))
+      .join("");
+  }
+}
+
 export class Memo {
   constructor(folder = "./memo_folder") {
     this.folder = folder;
@@ -15,36 +43,22 @@ export class Memo {
   }
 
   add() {
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
-    const now = new Date();
-    const dateTimeComponents = [
-      now.getFullYear(),
-      now.getMonth() + 1,
-      now.getDate(),
-      now.getHours(),
-      now.getMinutes(),
-      now.getSeconds(),
-    ];
-
-    const fileName_dateTime = dateTimeComponents
-      .map((component) => String(component).padStart(2, "0"))
-      .join("");
+    const fileNameDateTime = new FileName();
+    const fileName = fileNameDateTime.create();
 
     let inputMemo = [];
 
     console.log("Fill in your notes. If you want to exit, type “end”.");
 
+    const terminalInput = new TerminalInput();
+    const rl = terminalInput.rl();
     rl.on("line", (input) => {
       if (input === "end") {
         rl.close();
       } else {
         inputMemo.push(input);
         fs.writeFileSync(
-          `${this.folder}/${fileName_dateTime}.txt`,
+          `${this.folder}/${fileName}.txt`,
           inputMemo.join("\n"),
         );
       }
