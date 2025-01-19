@@ -1,4 +1,4 @@
-export function runPromise(db, sql) {
+export function runAsync(db, sql) {
   return new Promise((resolve, reject) => {
     db.run(sql, function (err) {
       if (err) return reject(err);
@@ -7,7 +7,7 @@ export function runPromise(db, sql) {
   });
 }
 
-export function getPromise(db, sql) {
+export function getAsync(db, sql) {
   return new Promise((resolve, reject) => {
     db.get(sql, (err, row) => {
       if (err) return reject(err);
