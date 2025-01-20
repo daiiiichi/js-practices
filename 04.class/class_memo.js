@@ -68,7 +68,7 @@ export class Memo {
   async read() {
     try {
       const file_list = await this.files.getFirstLines();
-      const selectedFirstLine = await this.files.SelectList(file_list);
+      const selectedFirstLine = await this.files.selectList(file_list);
       const userSelectedFile = await this.files.findFile(
         file_list,
         selectedFirstLine,
@@ -87,7 +87,7 @@ export class Memo {
   async delete() {
     try {
       const file_list = await this.files.getFirstLines();
-      const selectedFirstLine = await this.files.SelectList(file_list);
+      const selectedFirstLine = await this.files.selectList(file_list);
       const userSelectedFile = await this.files.findFile(
         file_list,
         selectedFirstLine,
@@ -122,7 +122,7 @@ export class Files {
     return fileList;
   }
 
-  async SelectList(fileList) {
+  async selectList(fileList) {
     const choices = fileList.map((file) => file.firstLine);
     const { Select } = pkg;
     const selectPrompt = new Select({
