@@ -4,12 +4,19 @@ import readline from "readline";
 import pkg from "enquirer";
 
 class TerminalInput {
-  rl() {
-    const rl = readline.createInterface({
+  constructor() {
+    this.rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
     });
-    return rl;
+  }
+
+  online(callback) {
+    this.rl.on("line", callback);
+  }
+
+  close() {
+    this.rl.close();
   }
 }
 
@@ -51,10 +58,9 @@ export class Memo {
     console.log("Fill in your notes. If you want to exit, type “end”.");
 
     const terminalInput = new TerminalInput();
-    const rl = terminalInput.rl();
-    rl.on("line", (input) => {
+    terminalInput.online((input) => {
       if (input === "end") {
-        rl.close();
+        terminalInput.close();
       } else {
         inputMemo.push(input);
         fs.writeFileSync(
