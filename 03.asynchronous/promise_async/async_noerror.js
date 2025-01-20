@@ -1,16 +1,27 @@
 import sqlite3 from "sqlite3";
-import { createTable, addRecord, getRecord, deleteTable } from "./function.js";
+import { runAsync, getAsync } from "./function.js";
 
 const db = new sqlite3.Database(":memory:");
 
 async function main() {
-  await createTable(
-    db,
-    "CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
-  );
-  await addRecord(db, "INSERT INTO books (title) VALUES ('Fight!')");
-  await getRecord(db, "SELECT * FROM books");
-  await deleteTable(db, "DELETE FROM books");
+  try {
+    await runAsync(
+      db,
+      "CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
+    );
+    console.log("booksテーブルの作成に成功しました。");
+
+    await getAsync(db, "INSERT INTO books (title) VALUES ('Fight!')");
+    console.log("レコードの追加に成功しました。");
+
+    const rows = await runAsync(db, "SELECT * FROM books");
+    console.log("レコードの取得に成功しました。", rows);
+
+    await runAsync(db, "DELETE FROM books");
+    console.log("テーブルの削除に成功しました。");
+  } catch (err) {
+    console.error("エラーが発生しました。", err);
+  }
 }
 
 main();
