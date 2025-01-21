@@ -1,6 +1,9 @@
 - TerminalInput
-  - rl()
+  - constructor()
+  - online(callback)
+  - close()
 - FileName
+  - constructor(date = new Date())
   - create()
 - Memo
   - constructor(folder = "./memo_folder")
@@ -11,6 +14,6 @@
 - File
   - constructor(folder = "./memo_folder")
   - getFirstLines()
-  - SelectList(fileList)
+  - selectList(fileList)
   - findFile(fileList, selectedFirstLine)
   - displayList()
