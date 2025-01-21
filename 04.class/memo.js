@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import minimist from "minimist";
-import { Memo, Files } from "./class_memo.js";
+import { Memo } from "./memo_manager/memo.js";
+import { Files } from "./memo_manager/files.js";
 
 const memo = new Memo();
 const files = new Files();
