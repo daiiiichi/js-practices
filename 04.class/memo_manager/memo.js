@@ -18,7 +18,7 @@ export class Memo {
     const fileNameDateTime = new FileName();
     const fileName = fileNameDateTime.create();
 
-    let inputMemo = [];
+    const inputMemo = [];
 
     console.log("Fill in your notes. If you want to exit, type “end”.");
 
