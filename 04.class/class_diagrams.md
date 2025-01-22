@@ -1,7 +1,6 @@
 - TerminalInput
   - constructor()
-  - online(callback)
-  - close()
+  - get()
 - FileName
   - constructor(date = new Date())
   - create()
