@@ -14,26 +14,13 @@ export class Memo {
     return text.split("\n")[0];
   }
 
-  add() {
+  async add() {
     const fileNameDateTime = new FileName();
     const fileName = fileNameDateTime.create();
 
-    const inputMemo = [];
-
-    console.log("Fill in your notes. If you want to exit, type “end”.");
-
     const terminalInput = new TerminalInput();
-    terminalInput.online((input) => {
-      if (input === "end") {
-        terminalInput.close();
-      } else {
-        inputMemo.push(input);
-        fs.writeFileSync(
-          `${this.folder}/${fileName}.txt`,
-          inputMemo.join("\n"),
-        );
-      }
-    });
+    const inputMemo = await terminalInput.get();
+    fs.writeFileSync(`${this.folder}/${fileName}.txt`, inputMemo.join("\n"));
   }
 
   async read() {

@@ -8,11 +8,19 @@ export class TerminalInput {
     });
   }
 
-  online(callback) {
-    this.rl.on("line", callback);
-  }
+  get() {
+    return new Promise((resolve) => {
+      const inputMemo = [];
+      console.log("Fill in your notes. If you want to exit, type “end”.");
 
-  close() {
-    this.rl.close();
+      this.rl.on("line", (input) => {
+        if (input === "end") {
+          this.rl.close();
+          resolve(inputMemo);
+        } else {
+          inputMemo.push(input);
+        }
+      });
+    });
   }
 }
