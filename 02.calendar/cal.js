@@ -4,9 +4,9 @@ import calendarize from "calendarize";
 import minimist from "minimist";
 
 const input = minimist(process.argv.slice(2));
-const timeStamp = new Date();
-const year = input.y ?? timeStamp.getFullYear();
-const month = input.m ?? timeStamp.getMonth() + 1;
+const now = new Date();
+const year = input.y ?? now.getFullYear();
+const month = input.m ?? now.getMonth() + 1;
 const calendar = calendarize(new Date(year, month - 1));
 
 const calendarName = `      ${month}月 ${year}`;
