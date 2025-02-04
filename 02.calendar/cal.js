@@ -25,6 +25,7 @@ calendar.forEach((week) => {
         return `${day}`;
       }
     })
-    .join(" ");
+    .join(" ")
+    .trimEnd();
   console.log(weekStr);
 });
