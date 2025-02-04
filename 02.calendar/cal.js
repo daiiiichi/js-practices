@@ -18,13 +18,13 @@ calendar.forEach((week) => {
   let weekStr = week
     .map((day) => {
       if (day === 0) {
-        return "   ";
+        return "  ";
       } else if (day < 10) {
-        return ` ${day} `;
+        return ` ${day}`;
       } else {
-        return `${day} `;
+        return `${day}`;
       }
     })
-    .join("");
-  process.stdout.write(weekStr.trimEnd() + "\n");
+    .join(" ");
+  console.log(weekStr);
 });
