@@ -10,10 +10,10 @@ const month = input.m ?? now.getMonth() + 1;
 const calendar = calendarize(new Date(year, month - 1));
 
 const calendarName = `      ${month}月 ${year}`;
-const weekdayName = "日 月 火 水 木 金 土";
+const dayOfWeekLabel = "日 月 火 水 木 金 土";
 
 console.log(calendarName);
-console.log(weekdayName);
+console.log(dayOfWeekLabel);
 calendar.forEach((week) => {
   let weekStr = week
     .map((day) => {
