@@ -1,0 +1,18 @@
+- TerminalInput
+  - constructor()
+  - get()
+- FileName
+  - constructor(date = new Date())
+  - create()
+- Memo
+  - constructor(folder = "./memo_folder")
+  - getFirstLine(filePath)
+  - add()
+  - read()
+  - delete()
+- File
+  - constructor(folder = "./memo_folder")
+  - getFirstLines()
+  - selectList(fileList)
+  - findFile(fileList, selectedFirstLine)
+  - displayList()
