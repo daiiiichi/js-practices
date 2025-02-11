@@ -4,26 +4,30 @@ import { runAsync, getAsync } from "./function.js";
 const db = new sqlite3.Database(":memory:");
 
 async function main() {
+  await runAsync(
+    db,
+    "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
+  );
+
   try {
-    await runAsync(
+    const insertResult = await runAsync(
       db,
-      "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
-    );
-
-    const insertRecord = await runAsync(
-      db,
-      "INSERT INTO books (title) VALUES (NULL)", //error
-    );
-    console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
-
-    const rows = await getAsync(db, "SELECT * FROM refs"); //error
-    console.log("レコードの取得に成功しました。", rows);
-
-    await runAsync(db, "DELETE FROM books");
-    console.log("テーブルの削除に成功しました。");
+      "INSERT INTO books (title) VALUES (NULL)",
+    ); // error
+    console.log("レコードの追加に成功しました。id:", insertResult.lastID);
   } catch (err) {
-    console.error("エラーが発生しました。", err);
+    console.error("レコードの追加に失敗しました。ERROR:", err);
   }
+
+  try {
+    const row = await getAsync(db, "SELECT * FROM refs"); // error
+    console.log("レコードの取得に成功しました。", row);
+  } catch (err) {
+    console.error("レコードの取得に失敗しました。ERROR:", err);
+  }
+
+  await runAsync(db, "DELETE FROM books");
+  console.log("テーブルの削除に成功しました。");
 }
 
 main();

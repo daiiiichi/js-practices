@@ -8,19 +8,28 @@ runAsync(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
   .then(() => {
-    return runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')");
+    return runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')").catch(
+      (err) => {
+        console.error("レコードの追加に失敗しました。ERROR:", err);
+      },
+    );
   })
-  .then((insertRecord) => {
-    console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
-    return getAsync(db, "SELECT * FROM books");
+  .then((insertResult) => {
+    if (insertResult) {
+      console.log("レコードの追加に成功しました。id:", insertResult.lastID);
+    }
+
+    return getAsync(db, "SELECT * FROM books").catch((err) => {
+      console.error("レコードの取得に失敗しました。ERROR:", err);
+    });
   })
-  .then(() => {
-    console.log("レコードの取得に成功しました。");
+  .then((row) => {
+    if (row) {
+      console.log("レコードの取得に成功しました。", row);
+    }
+
     return runAsync(db, "DELETE FROM books");
   })
   .then(() => {
     console.log("テーブルの削除に成功しました。");
-  })
-  .catch((err) => {
-    console.error("エラーが発生しました。", err);
   });
