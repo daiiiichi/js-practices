@@ -8,7 +8,6 @@ runAsync(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
   .then(() => {
-    console.log("booksテーブルの作成に成功しました。");
     return runAsync(db, "INSERT INTO books (title) VALUES (NULL)"); //error
   })
   .then((insertRecord) => {

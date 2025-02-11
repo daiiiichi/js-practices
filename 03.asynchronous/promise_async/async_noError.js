@@ -9,7 +9,6 @@ async function main() {
       db,
       "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
     );
-    console.log("booksテーブルの作成に成功しました。");
 
     const insertRecord = await runAsync(
       db,
