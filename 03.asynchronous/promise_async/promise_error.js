@@ -5,7 +5,7 @@ const db = new sqlite3.Database(":memory:");
 
 runAsync(
   db,
-  "CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
+  "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
   .then(() => {
     console.log("booksテーブルの作成に成功しました。");

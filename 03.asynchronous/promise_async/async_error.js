@@ -7,7 +7,7 @@ async function main() {
   try {
     await runAsync(
       db,
-      "CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
+      "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
     );
     console.log("booksテーブルの作成に成功しました。");
 
