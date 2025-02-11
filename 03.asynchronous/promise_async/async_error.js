@@ -13,7 +13,7 @@ async function main() {
 
     const insertRecord = await runAsync(
       db,
-      "INSERT INTO books (title) VALUES 1",
+      "INSERT INTO books (title) VALUES (NULL)", //error
     );
     console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
 

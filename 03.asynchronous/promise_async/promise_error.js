@@ -9,7 +9,7 @@ runAsync(
 )
   .then(() => {
     console.log("booksテーブルの作成に成功しました。");
-    return runAsync(db, "INSERT INTO books (title) VALUES 1"); //error
+    return runAsync(db, "INSERT INTO books (title) VALUES (NULL)"); //error
   })
   .then((insertRecord) => {
     console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
