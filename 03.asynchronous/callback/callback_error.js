@@ -8,14 +8,14 @@ db.run(
     // Error: title(文字列型)にNULLを追加
     db.run("INSERT INTO books (title) VALUES (NULL)", function (err) {
       if (err) {
-        console.error("レコードの追加に失敗しました。");
+        console.error("レコードの追加に失敗しました。ERROR:", err);
       } else {
         console.log("レコードの追加に成功しました。id:", this.lastID);
       }
 
       db.get("SELECT * FROM books", (err, row) => {
         if (err) {
-          console.error("レコードの取得に失敗しました。");
+          console.error("レコードの取得に失敗しました。ERROR:", err);
         } else {
           console.log("レコードの取得に成功しました。", row);
         }
