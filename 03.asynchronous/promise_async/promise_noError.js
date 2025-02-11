@@ -9,11 +9,11 @@ runAsync(
 )
   .then(() => {
     console.log("booksテーブルの作成に成功しました。");
-    return getAsync(db, "INSERT INTO books (title) VALUES ('Fight!')");
+    return runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')");
   })
-  .then(() => {
-    console.log("レコードの追加に成功しました。");
-    return runAsync(db, "SELECT * FROM books");
+  .then((insertRecord) => {
+    console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
+    return getAsync(db, "SELECT * FROM books");
   })
   .then(() => {
     console.log("レコードの取得に成功しました。");

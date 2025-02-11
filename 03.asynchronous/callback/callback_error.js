@@ -6,9 +6,9 @@ db.run(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
   () => {
     // Error: title(文字列型)に数値型を追加
-    db.run("INSERT INTO books (title) VALUES 1", (err) => {
+    db.run("INSERT INTO books (title) VALUES 1", function (err) {
       if (err) return console.error("レコードの追加に失敗しました。");
-      console.log("レコードの追加に成功しました。");
+      console.log("レコードの追加に成功しました。id:", this.lastID);
 
       db.get("SELECT * FROM books", (err, row) => {
         if (err) return console.error("レコードの取得に失敗しました。");

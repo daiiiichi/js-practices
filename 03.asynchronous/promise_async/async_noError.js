@@ -11,10 +11,13 @@ async function main() {
     );
     console.log("booksテーブルの作成に成功しました。");
 
-    await getAsync(db, "INSERT INTO books (title) VALUES ('Fight!')");
-    console.log("レコードの追加に成功しました。");
+    const insertRecord = await runAsync(
+      db,
+      "INSERT INTO books (title) VALUES ('Fight!')",
+    );
+    console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
 
-    const rows = await runAsync(db, "SELECT * FROM books");
+    const rows = await getAsync(db, "SELECT * FROM books");
     console.log("レコードの取得に成功しました。", rows);
 
     await runAsync(db, "DELETE FROM books");
