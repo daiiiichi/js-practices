@@ -13,7 +13,8 @@ db.run(
         console.log("レコードの追加に成功しました。id:", this.lastID);
       }
 
-      db.get("SELECT * FROM books", (err, row) => {
+      // Error: 存在しないテーブルの参照
+      db.get("SELECT * FROM refs", (err, row) => {
         if (err) {
           console.error("レコードの取得に失敗しました。ERROR:", err);
         } else {

@@ -16,7 +16,7 @@ async function main() {
     );
     console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
 
-    const rows = await getAsync(db, "SELECT * FROM books");
+    const rows = await getAsync(db, "SELECT * FROM refs"); //error
     console.log("レコードの取得に成功しました。", rows);
 
     await runAsync(db, "DELETE FROM books");

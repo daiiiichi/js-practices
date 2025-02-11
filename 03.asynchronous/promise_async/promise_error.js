@@ -12,7 +12,7 @@ runAsync(
   })
   .then((insertRecord) => {
     console.log("レコードの追加に成功しました。id:", insertRecord.lastID);
-    return getAsync(db, "SELECT * FROM books");
+    return getAsync(db, "SELECT * FROM refs"); //error
   })
   .then(() => {
     console.log("レコードの取得に成功しました。");
