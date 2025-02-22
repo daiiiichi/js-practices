@@ -14,9 +14,9 @@ runAsync(
       },
     );
   })
-  .then((insertResult) => {
-    if (insertResult) {
-      console.log("レコードの追加に成功しました。id:", insertResult.lastID);
+  .then((result) => {
+    if (result) {
+      console.log("レコードの追加に成功しました。id:", result.lastID);
     }
 
     return getAsync(db, "SELECT * FROM books").catch((err) => {

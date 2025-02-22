@@ -10,11 +10,11 @@ async function main() {
   );
 
   try {
-    const insertResult = await runAsync(
+    const result = await runAsync(
       db,
       "INSERT INTO books (title) VALUES (NULL)",
     ); // Error: title(文字列型)にNULLを追加
-    console.log("レコードの追加に成功しました。id:", insertResult.lastID);
+    console.log("レコードの追加に成功しました。id:", result.lastID);
   } catch (err) {
     console.error("レコードの追加に失敗しました。ERROR:", err);
   }

@@ -13,9 +13,9 @@ runAsync(
         console.error("レコードの追加に失敗しました。ERROR:", err);
       });
   })
-  .then((insertResult) => {
-    if (insertResult) {
-      console.log("レコードの追加に成功しました。id:", insertResult.lastID);
+  .then((result) => {
+    if (result) {
+      console.log("レコードの追加に成功しました。id:", result.lastID);
     }
 
     return getAsync(db, "SELECT * FROM refs") // Error: 存在しないテーブルの参照
