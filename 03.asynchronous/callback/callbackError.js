@@ -8,7 +8,10 @@ db.run(
     // Error: title(文字列型)にNULLを追加
     db.run("INSERT INTO books (title) VALUES (NULL)", function (err) {
       if (err) {
-        console.error("レコードの追加に失敗しました。ERROR:", err);
+        console.error(
+          "レコードの追加に失敗しました。ERROR MESSAGE:",
+          err.message,
+        );
       } else {
         console.log("レコードの追加に成功しました。id:", this.lastID);
       }
@@ -16,7 +19,10 @@ db.run(
       // Error: 存在しないテーブルの参照
       db.get("SELECT * FROM refs", (err, row) => {
         if (err) {
-          console.error("レコードの取得に失敗しました。ERROR:", err);
+          console.error(
+            "レコードの取得に失敗しました。ERROR MESSAGE:",
+            err.message,
+          );
         } else {
           console.log("レコードの取得に成功しました。", row);
         }

@@ -10,7 +10,10 @@ runAsync(
   .then(() => {
     return runAsync(db, "INSERT INTO books (title) VALUES (NULL)") // Error: title(文字列型)にNULLを追加
       .catch((err) => {
-        console.error("レコードの追加に失敗しました。ERROR:", err);
+        console.error(
+          "レコードの追加に失敗しました。ERROR MESSAGE:",
+          err.message,
+        );
       });
   })
   .then((result) => {
@@ -20,7 +23,10 @@ runAsync(
 
     return getAsync(db, "SELECT * FROM refs") // Error: 存在しないテーブルの参照
       .catch((err) => {
-        console.error("レコードの取得に失敗しました。ERROR:", err);
+        console.error(
+          "レコードの取得に失敗しました。ERROR MESSAGE:",
+          err.message,
+        );
       });
   })
   .then((row) => {
