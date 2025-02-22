@@ -7,9 +7,7 @@ runAsync(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
-  .then(() => {
-    return runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')");
-  })
+  .then(() => runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')"))
   .then((result) => {
     if (result) {
       console.log("レコードの追加に成功しました。id:", result.lastID);
@@ -24,6 +22,4 @@ runAsync(
 
     return runAsync(db, "DROP TABLE books");
   })
-  .then(() => {
-    console.log("テーブルの削除に成功しました。");
-  });
+  .then(() => console.log("テーブルの削除に成功しました。"));

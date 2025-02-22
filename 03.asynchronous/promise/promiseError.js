@@ -30,6 +30,4 @@ runAsync(
 
     return runAsync(db, "DROP TABLE books");
   })
-  .then(() => {
-    console.log("テーブルの削除に成功しました。");
-  });
+  .then(() => console.log("テーブルの削除に成功しました。"));
