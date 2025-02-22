@@ -28,7 +28,7 @@ runAsync(
       console.log("レコードの取得に成功しました。", row);
     }
 
-    return runAsync(db, "DELETE FROM books");
+    return runAsync(db, "DROP TABLE books");
   })
   .then(() => {
     console.log("テーブルの削除に成功しました。");

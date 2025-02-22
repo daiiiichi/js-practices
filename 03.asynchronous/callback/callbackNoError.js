@@ -19,7 +19,7 @@ db.run(
           console.log("レコードの取得に成功しました。", row);
         }
 
-        db.run("DELETE FROM books", () => {
+        db.run("DROP TABLE books", () => {
           console.log("テーブルの削除に成功しました。");
         });
       });

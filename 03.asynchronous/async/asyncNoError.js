@@ -26,7 +26,7 @@ async function main() {
     console.error("レコードの取得に失敗しました。ERROR:", err);
   }
 
-  await runAsync(db, "DELETE FROM books");
+  await runAsync(db, "DROP TABLE books");
   console.log("テーブルの削除に成功しました。");
 }
 
