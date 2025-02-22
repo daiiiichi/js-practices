@@ -8,7 +8,7 @@ runAsync(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
   .then(() => {
-    return runAsync(db, "INSERT INTO books (title) VALUES (NULL)") // error
+    return runAsync(db, "INSERT INTO books (title) VALUES (NULL)") // Error: title(文字列型)にNULLを追加
       .catch((err) => {
         console.error("レコードの追加に失敗しました。ERROR:", err);
       });
@@ -18,7 +18,7 @@ runAsync(
       console.log("レコードの追加に成功しました。id:", insertResult.lastID);
     }
 
-    return getAsync(db, "SELECT * FROM refs") // error
+    return getAsync(db, "SELECT * FROM refs") // Error: 存在しないテーブルの参照
       .catch((err) => {
         console.error("レコードの取得に失敗しました。ERROR:", err);
       });
