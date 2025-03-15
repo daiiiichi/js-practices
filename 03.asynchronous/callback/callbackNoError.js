@@ -8,7 +8,7 @@ db.run(
     db.run("INSERT INTO books (title) VALUES ('Fight!')", function () {
       console.log("レコードの追加に成功しました。id:", this.lastID);
 
-      db.get("SELECT * FROM books", (err, row) => {
+      db.get("SELECT * FROM books", (_, row) => {
         console.log("レコードの取得に成功しました。", row);
 
         db.run("DROP TABLE books", () => {
