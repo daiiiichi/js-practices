@@ -11,21 +11,13 @@ runAsync(
   .catch((err) => {
     console.error(err.message);
   })
-  .then((result) => {
-    if (result) {
-      console.log("レコードの追加に成功しました。id:", result.lastID);
-    }
-
+  .then(() => {
     return getAsync(db, "SELECT * FROM refs"); // Error: 存在しないテーブルの参照
   })
   .catch((err) => {
     console.error(err.message);
   })
-  .then((row) => {
-    if (row) {
-      console.log("レコードの取得に成功しました。", row);
-    }
-
+  .then(() => {
     return runAsync(db, "DROP TABLE books");
   })
   .then(() => {
