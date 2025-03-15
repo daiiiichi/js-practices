@@ -9,17 +9,11 @@ runAsync(
 )
   .then(() => runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')"))
   .then((result) => {
-    if (result) {
-      console.log("レコードの追加に成功しました。id:", result.lastID);
-    }
-
+    console.log("レコードの追加に成功しました。id:", result.lastID);
     return getAsync(db, "SELECT * FROM books");
   })
   .then((row) => {
-    if (row) {
-      console.log("レコードの取得に成功しました。", row);
-    }
-
+    console.log("レコードの取得に成功しました。", row);
     return runAsync(db, "DROP TABLE books");
   })
   .then(() => {
