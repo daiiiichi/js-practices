@@ -11,15 +11,11 @@ runAsync(
   .catch((err) => {
     console.error(err.message);
   })
-  .then(() => {
-    return getAsync(db, "SELECT * FROM refs"); // Error: 存在しないテーブルの参照
-  })
+  .then(() => getAsync(db, "SELECT * FROM refs")) // Error: 存在しないテーブルの参照
   .catch((err) => {
     console.error(err.message);
   })
-  .then(() => {
-    return runAsync(db, "DROP TABLE books");
-  })
+  .then(() => runAsync(db, "DROP TABLE books"))
   .then(() => {
     console.log("テーブルの削除に成功しました。");
   });
