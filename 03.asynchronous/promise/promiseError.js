@@ -8,10 +8,16 @@ runAsync(
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
   .then(() => runAsync(db, "INSERT INTO books (title) VALUES (NULL)")) // Error: title(文字列型)にNULLを追加
+  .then((result) => {
+    console.log("レコードの追加に成功しました。id:", result.lastID);
+  })
   .catch((err) => {
     console.error(err.message);
   })
   .then(() => getAsync(db, "SELECT * FROM refs")) // Error: 存在しないテーブルの参照
+  .then((row) => {
+    console.log("レコードの取得に成功しました。", row);
+  })
   .catch((err) => {
     console.error(err.message);
   })
