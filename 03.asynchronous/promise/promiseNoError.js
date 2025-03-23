@@ -7,14 +7,14 @@ runAsync(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 )
-  .then(() => runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')")) // Error: title(文字列型)にNULLを追加
+  .then(() => runAsync(db, "INSERT INTO books (title) VALUES ('Fight!')"))
   .then((result) => {
     console.log("レコードの追加に成功しました。id:", result.lastID);
   })
   .catch((err) => {
     console.error(err.message);
   })
-  .then(() => getAsync(db, "SELECT * FROM books")) // Error: 存在しないテーブルの参照
+  .then(() => getAsync(db, "SELECT * FROM books"))
   .then((row) => {
     console.log("レコードの取得に成功しました。", row);
   })
