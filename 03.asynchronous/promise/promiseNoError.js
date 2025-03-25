@@ -11,15 +11,9 @@ runAsync(
   .then((result) => {
     console.log("レコードの追加に成功しました。id:", result.lastID);
   })
-  .catch((err) => {
-    console.error(err.message);
-  })
   .then(() => getAsync(db, "SELECT * FROM books"))
   .then((row) => {
     console.log("レコードの取得に成功しました。", row);
-  })
-  .catch((err) => {
-    console.error(err.message);
   })
   .then(() => runAsync(db, "DROP TABLE books"))
   .then(() => {
