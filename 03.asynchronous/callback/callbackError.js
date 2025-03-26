@@ -7,16 +7,20 @@ db.run(
   () => {
     // Error: title(文字列型)にNULLを追加
     db.run("INSERT INTO books (title) VALUES (NULL)", function (err) {
-      if (err) {
+      if (err && typeof err === "object" && "message" in err) {
         console.error(err.message);
+      } else if (err) {
+        console.error(err);
       } else {
         console.log("レコードの追加に成功しました。id:", this.lastID);
       }
 
       // Error: 存在しないテーブルの参照
       db.get("SELECT * FROM refs", (err, row) => {
-        if (err) {
+        if (err && typeof err === "object" && "message" in err) {
           console.error(err.message);
+        } else if (err) {
+          console.error(err);
         } else {
           console.log("レコードの取得に成功しました。", row);
         }
