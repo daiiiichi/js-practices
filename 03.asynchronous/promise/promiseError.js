@@ -12,11 +12,7 @@ runAsync(
     console.log("レコードの追加に成功しました。id:", result.lastID);
   })
   .catch((err) => {
-    if (
-      typeof err === "object" &&
-      err.code === "SQLITE_CONSTRAINT" &&
-      err.message.includes("NOT NULL constraint failed")
-    ) {
+    if (err instanceof Error) {
       console.error(err.message);
     } else {
       throw err;
@@ -27,11 +23,7 @@ runAsync(
     console.log("レコードの取得に成功しました。", row);
   })
   .catch((err) => {
-    if (
-      typeof err === "object" &&
-      err.code === "SQLITE_ERROR" &&
-      err.message.includes("no such table")
-    ) {
+    if (err instanceof Error) {
       console.error(err.message);
     } else {
       throw err;
